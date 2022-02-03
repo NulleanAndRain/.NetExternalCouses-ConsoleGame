@@ -8,7 +8,7 @@ namespace NulleanAndRain.ConsoleGame.Core
 {
     public abstract class Component
     {
-        public abstract void Update();
+        public virtual void Update() { }
 
         public readonly GameObject gameObject;
 

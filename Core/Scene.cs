@@ -79,7 +79,7 @@ namespace NulleanAndRain.ConsoleGame.Core
                 }).Any(obj => obj != null);
         }
 
-        public void AddGameObject(GameObject gameObject)
+        public Scene AddGameObject(GameObject gameObject)
         {
             _sceneObjects.Add(gameObject);
             void destroy()
@@ -88,6 +88,7 @@ namespace NulleanAndRain.ConsoleGame.Core
                 gameObject.OnDestroy -= destroy;
             }
             gameObject.OnDestroy += destroy;
+            return this;
         }
 
 
