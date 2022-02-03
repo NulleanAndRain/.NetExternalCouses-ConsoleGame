@@ -18,9 +18,38 @@ namespace NulleanAndRain.ConsoleGame.Core
             Camera = camera;
         }
 
-        private List<string> Render(int width, int height, Point center)
+        private List<string> GetSceneView()
         {
-            throw new NotImplementedException();
+            var leftBorder = Camera.Center.X - Camera.Width / 2;
+            var rightBorder = leftBorder + Camera.Width;
+            var topBorder = Camera.Center.Y - Camera.Height / 2;
+            var bottomBorder = topBorder + Camera.Height;
+
+            var screen = new char[Camera.Height, Camera.Width];
+
+            foreach (var obj in _sceneObjects.Where(obj =>
+                obj.Position.X >= leftBorder &&
+                obj.Position.X <= rightBorder &&
+                obj.Position.Y <= topBorder &&
+                obj.Position.Y >= bottomBorder
+            ))
+            {
+                screen[obj.Position.Y - topBorder, obj.Position.X - leftBorder] = obj.Icon;
+            }
+
+            var lines = new List<string>();
+            var sb = new StringBuilder();
+            for (int i = 0; i < Camera.Height; i++)
+            {
+                for (int w = 0; w < Camera.Width; w++)
+                {
+                    sb.Append(screen[i, w]);
+                }
+                lines.Add(new string(sb.ToString()));
+                sb.Clear();
+            }
+
+            return lines;
         }
 
         public void Update()
@@ -28,8 +57,26 @@ namespace NulleanAndRain.ConsoleGame.Core
             foreach (var obj in SceneObjects)
             {
                 obj.Update();
-                Camera.RenderToConsole(Render(Camera.Width, Camera.Height, Camera.Center));
             }
+            Camera.CameraTick();
+            Camera.RenderToConsole(GetSceneView());
+        }
+
+        public bool CanMoveTo(GameObject movingObject, Point posTo)
+        {
+            return !_sceneObjects.Where(obj => obj != movingObject)
+                .Where(obj => obj.Position.X == posTo.X && obj.Position.Y == posTo.Y)
+                .Select(obj =>
+                {
+                    var collider = obj.GetComponent<Collider>();
+                    if (collider != null)
+                    {
+                        collider.CollideWith(movingObject);
+                        if (!collider.IsTigger)
+                            return obj;
+                    }
+                    return null;
+                }).Any(obj => obj != null);
         }
 
         public void AddGameObject(GameObject gameObject)

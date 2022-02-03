@@ -10,13 +10,19 @@ namespace NulleanAndRain.ConsoleGame.Core
     {
         private Scene _scene;
 
-        public Game()
+        private static Game _instance;
+        public static Game Instance => _instance ??= new Game();
+
+        public Game() : this(new Scene(new Camera())) { }
+
+        public Game(Scene scene)
         {
-            var camera = new Camera();
-            _scene = new Scene(camera);
+            _scene = scene;
             Time.OnGameTick += _scene.Update;
         }
 
         public void Start() => Time.Start();
+
+        public static bool CanMoveTo(GameObject obj, Point posTo) => Instance._scene.CanMoveTo(obj, posTo);
     }
 }

@@ -10,13 +10,15 @@ namespace NulleanAndRain.ConsoleGame.Core
     {
         public Point Position { get; protected set; }
 
+        public char Icon { get; protected set; } = ' ';
+
         private List<Component> _components = new();
 
         public event Action OnDestroy = delegate { };
 
         public GameObject() : this(Point.Zero) { }
 
-        protected GameObject(Point position)
+        public GameObject(Point position)
         {
             Position = position;
             Time.OnGameTick += UpdateComponents;
