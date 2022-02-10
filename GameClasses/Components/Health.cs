@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using NulleanAndRain.ConsoleGame.Core;
 
-namespace NulleanAndRain.ConsoleGame.Game.Components
+namespace NulleanAndRain.ConsoleGame.GameClasses.Components
 {
     public class Health : Component
     {

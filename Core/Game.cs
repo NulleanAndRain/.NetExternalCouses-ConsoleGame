@@ -19,6 +19,7 @@ namespace NulleanAndRain.ConsoleGame.Core
         {
             _scene = scene;
             Time.OnGameTick += _scene.Update;
+            _instance = this;
         }
 
         public void Start() => Time.Start();
@@ -33,11 +34,12 @@ namespace NulleanAndRain.ConsoleGame.Core
             }
         }
 
-        public static void CreateGameObject<T>(Point pos) where T: GameObject, new()
+        public static T CreateGameObject<T>(Point pos) where T: GameObject, new()
         {
             var obj = new T();
             obj.Position = pos;
             Instance._scene.AddGameObject(obj);
+            return obj;
         }
     }
 }

@@ -13,7 +13,7 @@ namespace NulleanAndRain.ConsoleGame.Core
 
         public Point Center { get; set; }
 
-        private GameObject? _moveAfter;
+        public GameObject? MoveAfter;
 
         public Camera(Point center)
         {
@@ -23,16 +23,18 @@ namespace NulleanAndRain.ConsoleGame.Core
         public Camera(GameObject obj)
         {
             Center = obj.Position;
-            _moveAfter = obj;
+            MoveAfter = obj;
         }
 
         public Camera(): this(Point.Zero) {}
 
         public void CameraTick()
         {
-            if (_moveAfter != null)
-                Center = _moveAfter.Position;
+            if (MoveAfter != null)
+                Center = MoveAfter.Position;
         }
+
+
 
         public void RenderToConsole(List<string> lines)
         {

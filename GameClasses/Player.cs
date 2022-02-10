@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using NulleanAndRain.ConsoleGame.Core;
-using NulleanAndRain.ConsoleGame.Game.Components;
+using NulleanAndRain.ConsoleGame.GameClasses.Components;
 
-namespace NulleanAndRain.ConsoleGame.Game
+namespace NulleanAndRain.ConsoleGame.GameClasses
 {
     public class Player : GameObject
     {
@@ -20,7 +20,7 @@ namespace NulleanAndRain.ConsoleGame.Game
 
         private Collider _collider;
         private Health _health;
-        private Direction dir;
+        private Direction dir = Direction.Up;
 
         public const int DefaultMaxHP = 100;
 

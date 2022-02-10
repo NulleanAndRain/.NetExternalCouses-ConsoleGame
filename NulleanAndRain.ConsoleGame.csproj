@@ -11,4 +11,10 @@
     <None Remove="Core\Input.cs~RF36236f.TMP" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="Map1.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>
