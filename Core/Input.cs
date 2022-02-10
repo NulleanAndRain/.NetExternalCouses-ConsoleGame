@@ -12,7 +12,32 @@ namespace NulleanAndRain.ConsoleGame.Core
         public static Input Instance => _instance ??= new Input();
 
         private volatile char _key;
-        public static char Key => Instance._key;
+
+        #region constants
+
+        public static class Constants
+        {
+            // public const char 
+            public const char EmptyKey = '\0';
+            public const char KeyUp = 'w';
+            public const char KeyRight = 'd';
+            public const char KeyDown = 's';
+            public const char KeyLeft = 'a';
+
+            public const char KeyAttack = ' ';
+        }
+
+        #endregion
+
+        public static char Key
+        {
+            get
+            {
+                var temp = Instance._key;
+                Instance._key = Constants.EmptyKey;
+                return temp;
+            }
+        }
 
         private Thread _thread;
 
@@ -25,7 +50,7 @@ namespace NulleanAndRain.ConsoleGame.Core
         {
             while (true)
             {
-                _key = Console.ReadKey(true).KeyChar;
+                _key = char.ToLower(Console.ReadKey(true).KeyChar);
             }
         }
     }

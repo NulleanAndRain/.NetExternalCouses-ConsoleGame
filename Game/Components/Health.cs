@@ -12,13 +12,23 @@ namespace NulleanAndRain.ConsoleGame.Game.Components
         private int _hp;
         private int _maxHp;
 
+        public event Action OnDeath = delegate { };
+        public bool IsDead { get; private set; }
+
         public int HP
         {
             get => _hp;
             set
             {
                 _hp = value;
-                if (_hp < 0) _hp = 0;
+                if (_hp < 0)
+                {
+                    OnDeath();
+                    IsDead = true;
+                    _hp = 0;
+                    return;
+                }
+                IsDead = false;
                 if (_hp > MaxHP) _hp = MaxHP;
             }
         }

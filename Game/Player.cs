@@ -50,7 +50,50 @@ namespace NulleanAndRain.ConsoleGame.Game
 
         public override void Update()
         {
-            throw new NotImplementedException();
+            if (_health.IsDead) return;
+            var key = Input.Key;
+            if (key != Input.Constants.EmptyKey)
+            {
+                var vec = Vector.Zero;
+                switch (key)
+                {
+                    case Input.Constants.KeyAttack:
+                        {
+                            Attack();
+                            break;
+                        }
+                    case Input.Constants.KeyUp:
+                        {
+                            vec.Y = 1;
+                            dir = Direction.Up;
+                            break;
+                        }
+                    case Input.Constants.KeyRight:
+                        {
+                            vec.X = 1;
+                            dir = Direction.Right;
+                            break;
+                        }
+                    case Input.Constants.KeyDown:
+                        {
+                            vec.Y = -1;
+                            dir = Direction.Down;
+                            break;
+                        }
+                    case Input.Constants.KeyLeft:
+                        {
+                            vec.X = -1;
+                            dir = Direction.Left;
+                            break;
+                        }
+                    default: break;
+                }
+            }
+        }
+
+        private static void Attack()
+        {
+
         }
     }
 }

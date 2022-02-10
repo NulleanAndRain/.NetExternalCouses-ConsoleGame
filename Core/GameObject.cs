@@ -10,7 +10,8 @@ namespace NulleanAndRain.ConsoleGame.Core
     {
         public Point Position { get; internal set; }
 
-        public virtual char Icon { get; } = ' ';
+        protected char _icon = ' ';
+        public virtual char Icon => _icon;
 
         private List<Component> _components = new();
 

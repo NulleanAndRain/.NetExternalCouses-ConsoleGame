@@ -9,8 +9,8 @@ namespace NulleanAndRain.ConsoleGame
     {
         public static void Main(string[] args)
         {
-            Time.OnGameTick += () => Console.WriteLine("Hello World!");
-            Time.Start();
+            //Time.OnGameTick += () => Console.WriteLine("Hello World!");
+            //Time.Start();
         }
     }
 }
