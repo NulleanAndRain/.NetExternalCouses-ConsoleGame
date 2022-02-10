@@ -36,6 +36,7 @@ namespace NulleanAndRain.ConsoleGame.Core
 
         public void RenderToConsole(List<string> lines)
         {
+            Console.SetCursorPosition(0, 0);
             foreach(var line in lines)
             {
                 Console.WriteLine(line);

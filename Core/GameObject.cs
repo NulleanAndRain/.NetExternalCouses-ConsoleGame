@@ -8,7 +8,7 @@ namespace NulleanAndRain.ConsoleGame.Core
 {
     public abstract class GameObject
     {
-        public Point Position { get; protected set; }
+        public Point Position { get; internal set; }
 
         public virtual char Icon { get; } = ' ';
 
@@ -43,5 +43,11 @@ namespace NulleanAndRain.ConsoleGame.Core
         protected void AddComponent(Component component) => _components.Add(component);
 
         public T? GetComponent<T>() where T: Component => _components.OfType<T>().FirstOrDefault();
+
+        public bool TryGetComponent<T>(out T component) where T: Component
+        {
+            component = GetComponent<T>();
+            return component != null;
+        }
     }
 }

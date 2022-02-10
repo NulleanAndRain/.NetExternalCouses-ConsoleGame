@@ -68,9 +68,12 @@ namespace NulleanAndRain.ConsoleGame.Core
                 .Where(obj => obj.Position.X == posTo.X && obj.Position.Y == posTo.Y)
                 .Select(obj =>
                 {
-                    var collider = obj.GetComponent<Collider>();
-                    if (collider != null)
+                    if (obj.TryGetComponent<Collider>(out var collider))
                     {
+                        if (movingObject.TryGetComponent<Collider>(out var coll1))
+                        {
+                            coll1.CollideWith(obj);
+                        }
                         collider.CollideWith(movingObject);
                         if (!collider.IsTigger)
                             return obj;
