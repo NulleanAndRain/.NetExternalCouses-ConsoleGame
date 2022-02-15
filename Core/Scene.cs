@@ -22,19 +22,28 @@ namespace NulleanAndRain.ConsoleGame.Core
         {
             var leftBorder = Camera.Center.X - Camera.Width / 2;
             var rightBorder = leftBorder + Camera.Width;
-            var topBorder = Camera.Center.Y - Camera.Height / 2;
-            var bottomBorder = topBorder + Camera.Height;
+            var topBorder = Camera.Center.Y + Camera.Height / 2;
+            var bottomBorder = topBorder - Camera.Height;
 
             var screen = new char[Camera.Height, Camera.Width];
+            for (var i = 0; i < Camera.Height; i++)
+            {
+                for (var j = 0; j < Camera.Width; j++)
+                {
+                    screen[i, j] = ' ';
+                }
+            }
 
-            foreach (var obj in _sceneObjects.Where(obj =>
+            var objects = _sceneObjects.Where(obj =>
                 obj.Position.X >= leftBorder &&
                 obj.Position.X <= rightBorder &&
                 obj.Position.Y <= topBorder &&
                 obj.Position.Y >= bottomBorder
-            ))
+            ).ToArray();
+
+            foreach (var obj in objects)
             {
-                screen[obj.Position.Y - topBorder, obj.Position.X - leftBorder] = obj.Icon;
+                screen[obj.Position.Y - bottomBorder, obj.Position.X - leftBorder] = obj.Icon;
             }
 
             var lines = new List<string>();

@@ -19,5 +19,10 @@ namespace NulleanAndRain.ConsoleGame.Core
         public double Magnitude => Math.Sqrt(Math.Abs(X * X + Y * Y));
 
         public static Vector Zero => new Vector(0, 0);
+
+        public static bool operator ==(Vector vec1, Vector vec2) => 
+            vec1.X == vec2.X && vec1.Y == vec2.Y;
+
+        public static bool operator !=(Vector vec1, Vector vec2) => !(vec1 == vec2);
     }
 }

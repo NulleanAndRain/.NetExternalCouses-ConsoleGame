@@ -44,6 +44,7 @@ namespace NulleanAndRain.ConsoleGame.Core
         public Input()
         {
             _thread = new Thread(ReadConsole);
+            _thread.Start();
         }
 
         private void ReadConsole()

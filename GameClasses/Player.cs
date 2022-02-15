@@ -54,7 +54,7 @@ namespace NulleanAndRain.ConsoleGame.GameClasses
             var key = Input.Key;
             if (key != Input.Constants.EmptyKey)
             {
-                var vec = Vector.Zero;
+                var velocity = Vector.Zero;
                 switch (key)
                 {
                     case Input.Constants.KeyAttack:
@@ -64,29 +64,33 @@ namespace NulleanAndRain.ConsoleGame.GameClasses
                         }
                     case Input.Constants.KeyUp:
                         {
-                            vec.Y = 1;
+                            velocity.Y = -1;
                             dir = Direction.Up;
                             break;
                         }
                     case Input.Constants.KeyRight:
                         {
-                            vec.X = 1;
+                            velocity.X = 1;
                             dir = Direction.Right;
                             break;
                         }
                     case Input.Constants.KeyDown:
                         {
-                            vec.Y = -1;
+                            velocity.Y = 1;
                             dir = Direction.Down;
                             break;
                         }
                     case Input.Constants.KeyLeft:
                         {
-                            vec.X = -1;
+                            velocity.X = -1;
                             dir = Direction.Left;
                             break;
                         }
                     default: break;
+                }
+                if (velocity != Vector.Zero)
+                {
+                    Game.MoveTo(this, Position + velocity);
                 }
             }
         }

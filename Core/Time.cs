@@ -10,7 +10,7 @@ namespace NulleanAndRain.ConsoleGame.Core
     {
         public static event Action OnGameTick = delegate { };
 
-        public const int MinFrameTime = 500;
+        public const int MinFrameTime = 50;
 
         public static void Start()
         {
@@ -19,7 +19,7 @@ namespace NulleanAndRain.ConsoleGame.Core
             {
                 startTime = DateTime.Now;
                 OnGameTick();
-                Thread.Sleep(MinFrameTime - (DateTime.Now - startTime).Milliseconds);
+                Thread.Sleep(Math.Max(0, MinFrameTime - (DateTime.Now - startTime).Milliseconds));
             }
         }
     }

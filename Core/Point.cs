@@ -18,5 +18,8 @@ namespace NulleanAndRain.ConsoleGame.Core
         }
 
         public static Point Zero => new Point(0, 0);
+
+        public static Point operator +(Point p, Vector v) => 
+            new Point(p.X + v.X, p.Y + v.Y);
     }
 }

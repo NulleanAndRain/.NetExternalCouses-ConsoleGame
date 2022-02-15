@@ -18,12 +18,14 @@ namespace NulleanAndRain.ConsoleGame.Core
         public Camera(Point center)
         {
             Center = center;
+            Console.CursorVisible = false;
         }
 
         public Camera(GameObject obj)
         {
             Center = obj.Position;
             MoveAfter = obj;
+            Console.CursorVisible = false;
         }
 
         public Camera(): this(Point.Zero) {}
@@ -39,10 +41,11 @@ namespace NulleanAndRain.ConsoleGame.Core
         public void RenderToConsole(List<string> lines)
         {
             Console.SetCursorPosition(0, 0);
-            foreach(var line in lines)
+            foreach(var line in lines.Take(Height))
             {
                 Console.WriteLine(line);
             }
+            Console.SetCursorPosition(0, 0);
         }
     }
 }
