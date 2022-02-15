@@ -15,6 +15,7 @@ namespace NulleanAndRain.ConsoleGame.Core
         protected Component(GameObject gameObject)
         {
             this.gameObject = gameObject;
+            gameObject.AddComponent(this);
         }
 
         public T? GetComponent<T>() where T : Component => gameObject.GetComponent<T>();

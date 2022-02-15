@@ -57,7 +57,7 @@ namespace NulleanAndRain.ConsoleGame.Core
                 obj.Position.X <= rightBorder &&
                 obj.Position.Y <= topBorder &&
                 obj.Position.Y >= bottomBorder
-            ).ToArray();
+            );
 
             foreach (var obj in objects)
             {

@@ -41,11 +41,15 @@ namespace NulleanAndRain.ConsoleGame.Core
 
         public virtual void Update() { }
 
-        protected void AddComponent(Component component) => _components.Add(component);
+        internal void AddComponent(Component component)
+        {
+            if (!_components.Contains(component))
+                _components.Add(component);
+        }
 
-        public T? GetComponent<T>() where T: Component => _components.OfType<T>().FirstOrDefault();
+        public T? GetComponent<T>() where T : Component => _components.OfType<T>().FirstOrDefault();
 
-        public bool TryGetComponent<T>(out T component) where T: Component
+        public bool TryGetComponent<T>(out T component) where T : Component
         {
             component = GetComponent<T>();
             return component != null;

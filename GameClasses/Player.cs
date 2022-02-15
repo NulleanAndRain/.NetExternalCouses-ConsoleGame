@@ -27,10 +27,7 @@ namespace NulleanAndRain.ConsoleGame.GameClasses
         public Player(Point pos) : base(pos)
         {
             _collider = new Collider(this, false);
-            AddComponent(_collider);
-
             _health = new Health(this, DefaultMaxHP);
-            AddComponent(_health);
         }
 
         public override char Icon

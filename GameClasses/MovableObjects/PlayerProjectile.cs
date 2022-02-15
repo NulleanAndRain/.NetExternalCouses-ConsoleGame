@@ -15,7 +15,7 @@ namespace NulleanAndRain.ConsoleGame.GameClasses
         {
             _icon = '*';
             _velocity = velocity;
-            var trigger = new Collider(this, true);
+            var trigger = new Collider(this);
 
             void onTriggerEnter(GameObject obj)
             {

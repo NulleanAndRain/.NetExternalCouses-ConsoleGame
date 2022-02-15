@@ -12,7 +12,7 @@ namespace NulleanAndRain.ConsoleGame.GameClasses
         public Obstacle(Point pos) : base(pos)
         {
             _icon = '#';
-            AddComponent(new Collider(this));
+            var collider = new Collider(this);
         }
 
         public Obstacle() : this(Point.Zero) { }
