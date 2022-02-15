@@ -54,14 +54,16 @@ namespace NulleanAndRain.ConsoleGame.Core
 
             var objects = _sceneObjects.Where(obj =>
                 obj.Position.X >= leftBorder &&
-                obj.Position.X <= rightBorder &&
-                obj.Position.Y <= topBorder &&
+                obj.Position.X < rightBorder &&
+                obj.Position.Y < topBorder &&
                 obj.Position.Y >= bottomBorder
             );
 
             foreach (var obj in objects)
             {
-                screen[obj.Position.Y - bottomBorder, obj.Position.X - leftBorder] = obj.Icon;
+                var y = obj.Position.Y - bottomBorder;
+                var x = obj.Position.X - leftBorder;
+                screen[y, x] = obj.Icon;
             }
 
             if (LastRenderableObj != null &&
