@@ -63,7 +63,7 @@ namespace NulleanAndRain.ConsoleGame.Core
 
         public void Update()
         {
-            foreach (var obj in SceneObjects)
+            foreach (var obj in SceneObjects.ToArray())
             {
                 obj.Update();
             }

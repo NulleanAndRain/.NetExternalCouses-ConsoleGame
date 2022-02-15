@@ -26,7 +26,7 @@ namespace NulleanAndRain.ConsoleGame.Core
 
         public static bool CanMoveTo(GameObject obj, Point posTo) => Instance._scene.CanMoveTo(obj, posTo);
 
-        public static void MoveTo(GameObject obj, Point posTo)
+        public static void Move(GameObject obj, Point posTo)
         {
             if (CanMoveTo(obj, posTo))
             {
@@ -40,6 +40,11 @@ namespace NulleanAndRain.ConsoleGame.Core
             obj.Position = pos;
             Instance._scene.AddGameObject(obj);
             return obj;
+        }
+
+        public static void AddToScene(GameObject obj)
+        {
+            Instance._scene.AddGameObject(obj);
         }
     }
 }

@@ -36,8 +36,6 @@ namespace NulleanAndRain.ConsoleGame.Core
                 Center = MoveAfter.Position;
         }
 
-
-
         public void RenderToConsole(List<string> lines)
         {
             Console.SetCursorPosition(0, 0);

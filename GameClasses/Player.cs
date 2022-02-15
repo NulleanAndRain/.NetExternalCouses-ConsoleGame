@@ -64,25 +64,25 @@ namespace NulleanAndRain.ConsoleGame.GameClasses
                         }
                     case Input.Constants.KeyUp:
                         {
-                            velocity.Y = -1;
+                            velocity = Vector.Up;
                             dir = Direction.Up;
                             break;
                         }
                     case Input.Constants.KeyRight:
                         {
-                            velocity.X = 1;
+                            velocity = Vector.Right;
                             dir = Direction.Right;
                             break;
                         }
                     case Input.Constants.KeyDown:
                         {
-                            velocity.Y = 1;
+                            velocity = Vector.Down;
                             dir = Direction.Down;
                             break;
                         }
                     case Input.Constants.KeyLeft:
                         {
-                            velocity.X = -1;
+                            velocity = Vector.Left;
                             dir = Direction.Left;
                             break;
                         }
@@ -90,14 +90,34 @@ namespace NulleanAndRain.ConsoleGame.GameClasses
                 }
                 if (velocity != Vector.Zero)
                 {
-                    Game.MoveTo(this, Position + velocity);
+                    Game.Move(this, Position + velocity);
                 }
             }
         }
 
-        private static void Attack()
+        private void Attack()
         {
+            Vector vel;
+            switch (dir)
+            {
+                case Direction.Up:
+                    vel = Vector.Up;
+                    break;
+                case Direction.Right:
+                    vel = Vector.Right;
+                    break;
+                case Direction.Left:
+                    vel = Vector.Left;
+                    break;
+                case Direction.Down:
+                    vel = Vector.Down;
+                    break;
+                default:
+                    vel = Vector.Up;
+                    break;
+            }
 
+            Game.AddToScene(new PlayerProjectile(this, Position + vel, vel));
         }
     }
 }
