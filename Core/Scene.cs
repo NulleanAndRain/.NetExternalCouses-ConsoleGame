@@ -11,6 +11,24 @@ namespace NulleanAndRain.ConsoleGame.Core
         private List<GameObject> _sceneObjects = new List<GameObject>();
         public IEnumerable<GameObject> SceneObjects => _sceneObjects;
 
+        private GameObject _lastRenderableObj;
+        public GameObject LastRenderableObj
+        {
+            get => _lastRenderableObj;
+            set
+            {
+                if (_lastRenderableObj != null) return;
+                _lastRenderableObj = value;
+                _sceneObjects.Add(value);
+                void destroy()
+                {
+                    _sceneObjects.Remove(value);
+                    value.OnDestroy -= destroy;
+                }
+                value.OnDestroy += destroy;
+            }
+        }
+
         public Camera Camera { get; private set; }
 
         public Scene(Camera camera)
@@ -43,6 +61,16 @@ namespace NulleanAndRain.ConsoleGame.Core
 
             foreach (var obj in objects)
             {
+                screen[obj.Position.Y - bottomBorder, obj.Position.X - leftBorder] = obj.Icon;
+            }
+
+            if (LastRenderableObj != null &&
+                LastRenderableObj.Position.X >= leftBorder &&
+                LastRenderableObj.Position.X <= rightBorder &&
+                LastRenderableObj.Position.Y <= topBorder &&
+                LastRenderableObj.Position.Y >= bottomBorder)
+            {
+                var obj = LastRenderableObj;
                 screen[obj.Position.Y - bottomBorder, obj.Position.X - leftBorder] = obj.Icon;
             }
 
@@ -93,6 +121,7 @@ namespace NulleanAndRain.ConsoleGame.Core
 
         public Scene AddGameObject(GameObject gameObject)
         {
+            if (gameObject == LastRenderableObj) return this;
             _sceneObjects.Add(gameObject);
             void destroy()
             {

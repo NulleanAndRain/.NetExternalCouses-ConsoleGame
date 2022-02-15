@@ -40,7 +40,8 @@ namespace NulleanAndRain.ConsoleGame.GameClasses
                                 player = new Player(new Point(col, row));
                                 camera.MoveAfter = player;
 
-                                scene.AddGameObject(player);
+                                scene.LastRenderableObj = player;
+                                //scene.AddGameObject(player);
                                 break;
                             }
                         case Constants.ObstacleSymbol:
