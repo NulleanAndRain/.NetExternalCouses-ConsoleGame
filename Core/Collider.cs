@@ -8,11 +8,11 @@ namespace NulleanAndRain.ConsoleGame.Core
 {
     public class Collider : Component
     {
-        public bool IsTigger { get; private set; }
+        public bool IsTrigger { get; private set; }
 
         public Collider(GameObject obj, bool isTigger = false): base(obj)
         {
-            IsTigger = isTigger;
+            IsTrigger = isTigger;
         }
 
         public override void Update() { }

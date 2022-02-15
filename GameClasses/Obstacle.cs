@@ -15,6 +15,7 @@ namespace NulleanAndRain.ConsoleGame.GameClasses
         {
             _icon = '#';
             _collider = new Collider(this);
+            AddComponent(_collider);
 
             void onCollision(GameObject _)
             {

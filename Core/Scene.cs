@@ -84,7 +84,7 @@ namespace NulleanAndRain.ConsoleGame.Core
                             coll1.CollideWith(obj);
                         }
                         collider.CollideWith(movingObject);
-                        if (!collider.IsTigger)
+                        if (!collider.IsTrigger)
                             return obj;
                     }
                     return null;
