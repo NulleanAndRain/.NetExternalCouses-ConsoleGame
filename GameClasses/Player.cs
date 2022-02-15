@@ -28,6 +28,15 @@ namespace NulleanAndRain.ConsoleGame.GameClasses
         {
             _collider = new Collider(this, false);
             _health = new Health(this, DefaultMaxHP);
+
+            Game.MainCamera.OnHUDRender += RenderHUD;
+
+            void destroy()
+            {
+                Game.MainCamera.OnHUDRender -= RenderHUD;
+                OnDestroy -= destroy;
+            }
+            OnDestroy += destroy;
         }
 
         public override char Icon
@@ -115,6 +124,23 @@ namespace NulleanAndRain.ConsoleGame.GameClasses
             }
 
             Game.AddToScene(new PlayerProjectile(this, Position + vel, vel));
+        }
+
+
+        private void RenderHUD()
+        {
+            //var cam = Game.MainCamera;
+            var status = $"{_health.HP} / {_health.MaxHP}";
+
+            var width = status.Length + 4;
+
+            var hudLine = new string('=', width);
+
+            Console.SetCursorPosition(0, 0);
+            Console.WriteLine(hudLine);
+            Console.WriteLine("| " + status + " |");
+            Console.Write(hudLine);
+            Console.SetCursorPosition(0, 0);
         }
     }
 }

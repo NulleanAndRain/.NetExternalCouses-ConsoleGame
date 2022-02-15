@@ -13,6 +13,8 @@ namespace NulleanAndRain.ConsoleGame.Core
         private static Game? _instance;
         public static Game Instance => _instance ??= new Game();
 
+        public static Camera MainCamera => Instance._scene.Camera;
+
         public Game() : this(new Scene(new Camera())) { }
 
         public Game(Scene scene)

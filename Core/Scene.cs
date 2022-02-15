@@ -38,15 +38,18 @@ namespace NulleanAndRain.ConsoleGame.Core
 
         private List<string> GetSceneView()
         {
-            var leftBorder = Camera.Center.X - Camera.Width / 2;
-            var rightBorder = leftBorder + Camera.Width;
-            var topBorder = Camera.Center.Y + Camera.Height / 2;
-            var bottomBorder = topBorder - Camera.Height;
+            var width = Camera.Width;
+            var height = Camera.Height;
 
-            var screen = new char[Camera.Height, Camera.Width];
-            for (var i = 0; i < Camera.Height; i++)
+            var leftBorder = Camera.Center.X - width / 2;
+            var rightBorder = leftBorder + width;
+            var topBorder = Camera.Center.Y + height / 2;
+            var bottomBorder = topBorder - height;
+
+            var screen = new char[height, width];
+            for (var i = 0; i < height; i++)
             {
-                for (var j = 0; j < Camera.Width; j++)
+                for (var j = 0; j < width; j++)
                 {
                     screen[i, j] = ' ';
                 }
@@ -78,9 +81,9 @@ namespace NulleanAndRain.ConsoleGame.Core
 
             var lines = new List<string>();
             var sb = new StringBuilder();
-            for (int i = 0; i < Camera.Height; i++)
+            for (int i = 0; i < height; i++)
             {
-                for (int w = 0; w < Camera.Width; w++)
+                for (int w = 0; w < width; w++)
                 {
                     sb.Append(screen[i, w]);
                 }
