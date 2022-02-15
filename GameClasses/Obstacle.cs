@@ -9,19 +9,10 @@ namespace NulleanAndRain.ConsoleGame.GameClasses
 {
     public class Obstacle : GameObject
     {
-        private Collider _collider;
-
         public Obstacle(Point pos) : base(pos)
         {
             _icon = '#';
-            _collider = new Collider(this);
-            AddComponent(_collider);
-
-            void onCollision(GameObject _)
-            {
-                _icon = '|';
-            }
-            _collider.OnCollision += onCollision;
+            AddComponent(new Collider(this));
         }
 
         public Obstacle() : this(Point.Zero) { }
