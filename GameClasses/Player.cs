@@ -23,15 +23,32 @@ namespace NulleanAndRain.ConsoleGame.GameClasses
         private Health _health;
         private Direction dir = Direction.Up;
 
+        public Point SpawnPoint { get; set; }
+
         public const int DefaultMaxHP = 100;
 
         public Player(Point pos) : base(pos)
         {
             _collider = new Collider(this, false);
             _health = new Health(this, DefaultMaxHP);
+            SpawnPoint = pos;
+
+            void respawn()
+            {
+                Time.DoAfterTime(() =>
+                {
+                    _health.HP = _health.MaxHP;
+                    //Position = SpawnPoint;
+                    Game.Move(this, SpawnPoint);
+                    _health.OnDeath += respawn;
+                },
+                10d);
+                _health.OnDeath -= respawn;
+            }
+
+            _health.OnDeath += respawn;
 
             //Game.MainCamera.OnHUDRender += RenderHUD;
-
             void destroy()
             {
                 //Game.MainCamera.OnHUDRender -= RenderHUD;
