@@ -25,7 +25,8 @@ namespace NulleanAndRain.ConsoleGame.GameClasses
 
         public Point SpawnPoint { get; set; }
 
-        public const int DefaultMaxHP = 100;
+        public const int DefaultMaxHP = 10;
+        private const double RESPAWN_TIME = 2d;
 
         public Player(Point pos) : base(pos)
         {
@@ -38,11 +39,10 @@ namespace NulleanAndRain.ConsoleGame.GameClasses
                 Time.DoAfterTime(() =>
                 {
                     _health.HP = _health.MaxHP;
-                    //Position = SpawnPoint;
                     Game.Move(this, SpawnPoint);
                     _health.OnDeath += respawn;
                 },
-                10d);
+                RESPAWN_TIME);
                 _health.OnDeath -= respawn;
             }
 

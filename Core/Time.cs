@@ -36,12 +36,13 @@ namespace NulleanAndRain.ConsoleGame.Core
                 startTime = DateTime.Now;
                 OnGameTick();
                 var unsubscribeList = new List<Subscription>();
-                foreach (var subscription in _subscriptions)
+                var time = DateTime.Now;
+                foreach (var sub in _subscriptions)
                 {
-                    if (subscription.EventTime >= DateTime.Now)
+                    if ((time - sub.EventTime).TotalSeconds >= 0)
                     {
-                        subscription.Event();
-                        unsubscribeList.Add(subscription);
+                        sub.Event();
+                        unsubscribeList.Add(sub);
                     }
                 }
                 foreach(var sub in unsubscribeList)
