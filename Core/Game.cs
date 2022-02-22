@@ -48,5 +48,7 @@ namespace NulleanAndRain.ConsoleGame.Core
         {
             Instance._scene.AddGameObject(obj);
         }
+
+        //public static 
     }
 }

@@ -43,6 +43,7 @@ namespace NulleanAndRain.ConsoleGame.GameClasses
         {
             get
             {
+                if (_health.IsDead) return 'F';
                 switch (dir)
                 {
                     case Direction.Up: return '^';
@@ -142,5 +143,7 @@ namespace NulleanAndRain.ConsoleGame.GameClasses
             Console.Write(hudLine);
             Console.SetCursorPosition(0, 0);
         }
+
+        public static bool IsPlayer(GameObject obj) => obj.GetType() == typeof(Player);
     }
 }

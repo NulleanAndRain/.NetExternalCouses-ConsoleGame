@@ -22,7 +22,7 @@ namespace NulleanAndRain.ConsoleGame.GameClasses.StaticSceneObjects
 
         protected override void OnTrigger(GameObject obj)
         {
-            if (obj.GetType() == typeof(Player))
+            if (Player.IsPlayer(obj))
             {
                 var playerHealth = obj.GetComponent<Health>();
                 if (playerHealth == null) return;
