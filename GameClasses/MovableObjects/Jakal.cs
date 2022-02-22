@@ -43,6 +43,7 @@ namespace NulleanAndRain.ConsoleGame.GameClasses.MovableObjects
             }
             OnDestroy += destroy;
             collider.OnCollision += Attack;
+            health.OnDeath += Destroy;
         }
 
         public Jakal() : this(Point.Zero) { }

@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using NulleanAndRain.ConsoleGame.Core;
 using NulleanAndRain.ConsoleGame.GameClasses.Components;
+using NulleanAndRain.ConsoleGame.GameClasses.MovableObjects;
 
 namespace NulleanAndRain.ConsoleGame.GameClasses
 {
