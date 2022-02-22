@@ -17,9 +17,25 @@ namespace NulleanAndRain.ConsoleGame.Core
 
         public Game() : this(new Scene(new Camera())) { }
 
+        private static List<Func<HudData>> HudRenderEvents = new();
+
         public Game(Scene scene)
         {
             _scene = scene;
+            void setHud()
+            {
+                var data = new List<HudData>();
+                foreach (var d in HudRenderEvents)
+                {
+                    var hud = d?.Invoke();
+                    if (hud != null && hud.HasValue)
+                    {
+                        data.Add(hud.Value);
+                    }
+                }
+                _scene.HudData = data;
+            }
+            Time.OnGameTick += setHud;
             Time.OnGameTick += _scene.Update;
             _instance = this;
         }
@@ -49,6 +65,14 @@ namespace NulleanAndRain.ConsoleGame.Core
             Instance._scene.AddGameObject(obj);
         }
 
-        //public static 
+        public static void AddToOnHudRenderEvent(Func<HudData> func)
+        {
+            HudRenderEvents.Add(func);
+        }
+
+        public static void RemoveFromOnHudRenderEvent(Func<HudData> func)
+        {
+            HudRenderEvents.Remove(func);
+        }
     }
 }

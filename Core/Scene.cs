@@ -11,14 +11,15 @@ namespace NulleanAndRain.ConsoleGame.Core
         private List<GameObject> _sceneObjects = new List<GameObject>();
         public IEnumerable<GameObject> SceneObjects => _sceneObjects;
 
-        private GameObject _lastRenderableObj;
-        public GameObject LastRenderableObj
+        private GameObject? _lastRenderableObj;
+        public GameObject? LastRenderableObj
         {
             get => _lastRenderableObj;
             set
             {
                 if (_lastRenderableObj != null) return;
                 _lastRenderableObj = value;
+                if (value == null) return;
                 _sceneObjects.Add(value);
                 void destroy()
                 {
@@ -28,6 +29,8 @@ namespace NulleanAndRain.ConsoleGame.Core
                 value.OnDestroy += destroy;
             }
         }
+
+        internal List<HudData>? HudData;
 
         public Camera Camera { get; private set; }
 
@@ -89,6 +92,27 @@ namespace NulleanAndRain.ConsoleGame.Core
                 }
                 lines.Add(new string(sb.ToString()));
                 sb.Clear();
+            }
+
+            if (HudData == null) return lines;
+
+            foreach(var hud in HudData)
+            {
+                var i = 0;
+                if (hud.lines == null) continue;
+                foreach (var line in hud.lines)
+                {
+                    var y = hud.ScreenPos.Y + i;
+                    var lineBuilder = new StringBuilder(lines[y]);
+                    var pos = 0;
+                    foreach (var ch in line)
+                    {
+                        lineBuilder[hud.ScreenPos.X + pos] = ch;
+                        pos++;
+                    }
+                    lines[y] = lineBuilder.ToString();
+                    i++;
+                }
             }
 
             return lines;

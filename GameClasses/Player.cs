@@ -25,8 +25,9 @@ namespace NulleanAndRain.ConsoleGame.GameClasses
 
         public Point SpawnPoint { get; set; }
 
-        public const int DefaultMaxHP = 10;
+        public const int DefaultMaxHP = 100;
         private const double RESPAWN_TIME = 2d;
+        private Point RenderPos { get; } = Point.Zero;
 
         public Player(Point pos) : base(pos)
         {
@@ -48,10 +49,11 @@ namespace NulleanAndRain.ConsoleGame.GameClasses
 
             _health.OnDeath += respawn;
 
-            //Game.MainCamera.OnHUDRender += RenderHUD;
+            Game.AddToOnHudRenderEvent(RenderHUD);
             void destroy()
             {
                 //Game.MainCamera.OnHUDRender -= RenderHUD;
+                Game.RemoveFromOnHudRenderEvent(RenderHUD);
                 OnDestroy -= destroy;
             }
             OnDestroy += destroy;
@@ -146,20 +148,18 @@ namespace NulleanAndRain.ConsoleGame.GameClasses
         }
 
 
-        private void RenderHUD()
+        private HudData RenderHUD()
         {
-            //var cam = Game.MainCamera;
+            var lines = new List<string>(3);
             var status = $"{_health.HP} / {_health.MaxHP}";
-
             var width = status.Length + 4;
-
             var hudLine = new string('=', width);
 
-            Console.SetCursorPosition(0, 0);
-            Console.WriteLine(hudLine);
-            Console.WriteLine("| " + status + " |");
-            Console.Write(hudLine);
-            Console.SetCursorPosition(0, 0);
+            lines.Add(hudLine);
+            lines.Add($"| {status} |");
+            lines.Add(hudLine);
+
+            return new HudData(lines, RenderPos);
         }
 
         public static bool IsPlayer(GameObject obj) => obj.GetType() == typeof(Player);

@@ -15,8 +15,6 @@ namespace NulleanAndRain.ConsoleGame.Core
 
         public GameObject? MoveAfter;
 
-        public event Action OnHUDRender = delegate { };
-
         public Camera(Point center)
         {
             Center = center;
@@ -43,7 +41,6 @@ namespace NulleanAndRain.ConsoleGame.Core
             {
                 Console.WriteLine(line);
             }
-            //OnHUDRender();
             Console.SetCursorPosition(0, 0);
         }
     }
