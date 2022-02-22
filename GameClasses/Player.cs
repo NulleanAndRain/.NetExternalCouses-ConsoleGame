@@ -29,11 +29,11 @@ namespace NulleanAndRain.ConsoleGame.GameClasses
             _collider = new Collider(this, false);
             _health = new Health(this, DefaultMaxHP);
 
-            Game.MainCamera.OnHUDRender += RenderHUD;
+            //Game.MainCamera.OnHUDRender += RenderHUD;
 
             void destroy()
             {
-                Game.MainCamera.OnHUDRender -= RenderHUD;
+                //Game.MainCamera.OnHUDRender -= RenderHUD;
                 OnDestroy -= destroy;
             }
             OnDestroy += destroy;

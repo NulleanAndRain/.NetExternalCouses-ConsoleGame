@@ -14,13 +14,6 @@ namespace NulleanAndRain.ConsoleGame
             var scene = SceneBuilder.ReadSceneFromFile(_filePath);
             var game = new Game(scene);
             game.Start();
-            //Time.OnGameTick += () =>
-            //{
-            //    var ch = Input.Key;
-            //    if (ch != Input.Constants.EmptyKey)
-            //        Console.WriteLine(">" + ch);
-            //};
-            //Time.Start();
         }
     }
 }

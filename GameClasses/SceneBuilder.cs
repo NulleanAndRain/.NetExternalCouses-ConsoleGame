@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using NulleanAndRain.ConsoleGame.Core;
+using NulleanAndRain.ConsoleGame.GameClasses.StaticSceneObjects;
 
 namespace NulleanAndRain.ConsoleGame.GameClasses
 {
@@ -14,6 +15,8 @@ namespace NulleanAndRain.ConsoleGame.GameClasses
             // public const char 
             public const char PlayerSymbol = 'v';
             public const char ObstacleSymbol = '#';
+            public const char DisappearingBonus = 'o';
+            public const char HealthBonus = '+';
         }
 
 
@@ -47,6 +50,20 @@ namespace NulleanAndRain.ConsoleGame.GameClasses
                         case Constants.ObstacleSymbol:
                             {
                                 var obj = new Obstacle(new Point(col, row));
+
+                                scene.AddGameObject(obj);
+                                break;
+                            }
+                        case Constants.DisappearingBonus:
+                            {
+                                var obj = new DisappearingBonus(new Point(col, row));
+
+                                scene.AddGameObject(obj);
+                                break;
+                            }
+                        case Constants.HealthBonus:
+                            {
+                                var obj = new HealthBonus(new Point(col, row));
 
                                 scene.AddGameObject(obj);
                                 break;

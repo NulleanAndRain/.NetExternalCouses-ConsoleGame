@@ -43,7 +43,7 @@ namespace NulleanAndRain.ConsoleGame.Core
             {
                 Console.WriteLine(line);
             }
-            OnHUDRender();
+            //OnHUDRender();
             Console.SetCursorPosition(0, 0);
         }
     }

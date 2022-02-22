@@ -106,7 +106,8 @@ namespace NulleanAndRain.ConsoleGame.Core
 
         public bool CanMoveTo(GameObject movingObject, Point posTo)
         {
-            return !_sceneObjects.Where(obj => obj != movingObject)
+            return !_sceneObjects.ToArray()
+                .Where(obj => obj != movingObject)
                 .Where(obj => obj.Position.X == posTo.X && obj.Position.Y == posTo.Y)
                 .Select(obj =>
                 {
